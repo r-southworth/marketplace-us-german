@@ -26,11 +26,12 @@ if (user.session === null || user.session === undefined) {
   location.href = `/${lang}/login`;
 }
 
-const { data, error } = await supabase.from("providerposts").select("*");
+const { data, error } = await supabase.from("sellerposts2").select("*");
+console.log(data, "data");
 
 data?.map((item) => {
   productCategories.forEach((productCategories) => {
-    if (item.service_category.toString() === productCategories.id) {
+    if (item.subject2.toString() === productCategories.id) {
       item.category = productCategories.name;
     }
   });
@@ -40,7 +41,7 @@ data?.map((item) => {
 interface ProviderPost {
   content: string;
   id: number;
-  category: string;
+  subject2: [];
   title: string;
   seller_name: string;
   major_municipality: string;
@@ -130,10 +131,12 @@ export const ServicesView: Component = () => {
       let allPosts = await allFilters.fetchAllPosts();
 
       //Add the categories to the posts in the current language
+      console.log(allPosts);
       allPosts?.map((item) => {
         productCategories.forEach((productCategories) => {
-          if (item.service_category.toString() === productCategories.id) {
-            item.category = productCategories.name;
+          console.log(item, productCategories);
+          if (item.subject2[0] === productCategories.id) {
+            item.subject2[0] = productCategories.name;
           }
         });
         delete item.service_category;
@@ -150,8 +153,8 @@ export const ServicesView: Component = () => {
 
       res.map((post) => {
         productCategories.forEach((productCategory) => {
-          if (post.service_category.toString() === productCategory.id) {
-            post.category = productCategory.name;
+          if (post.subject2[0] === productCategory.name) {
+            post.subject2[0] = productCategory.name;
           }
         });
         delete post.service_category;
@@ -356,8 +359,8 @@ export const ServicesView: Component = () => {
         <div class="w-11/12 md:mr-4 md:w-56">
           <LocationFilter
             filterPostsByMajorMunicipality={filterPostsByMajorMunicipality}
-            // filterPostsByMinorMunicipality={filterPostsByMinorMunicipality}
-            // filterPostsByGoverningDistrict={filterPostsByGoverningDistrict}
+          // filterPostsByMinorMunicipality={filterPostsByMinorMunicipality}
+          // filterPostsByGoverningDistrict={filterPostsByGoverningDistrict}
           />
         </div>
 

@@ -12,7 +12,7 @@ const t = useTranslations(lang);
 interface Post {
   content: string;
   id: number;
-  category: string;
+  subject2: string;
   title: string;
   seller_name: string;
   major_municipality: string;
@@ -36,11 +36,11 @@ export const ViewCard: Component<Props> = (props) => {
         props.posts.map(async (post: any) => {
           post.image_urls
             ? (post.image_url = await downloadImage(
-                post.image_urls.split(",")[0]
-              ))
+              post.image_urls.split(",")[0],
+            ))
             : (post.image_url = null);
           return post;
-        })
+        }),
       );
 
       setNewPosts(updatedPosts);
@@ -70,8 +70,8 @@ export const ViewCard: Component<Props> = (props) => {
         {newPosts().map((post: any) => (
           <li class=" w-[99%]">
             <a href={`/${lang}/posts/${post.id}`}>
-              <div class="mb-2 flex flex-col md:flex-row md:justify-start justify-center items-center md:items-start rounded-lg md:h-48 shadow-md shadow-shadow-LM dark:shadow-shadow-DM box-content border border-opacity-25 border-border1 dark:border-border1-DM dark:border-opacity-25 w-full">
-                <div class="flex md:w-48 w-full h-80 md:h-48 md:mr-2 items-center justify-center bg-background1 dark:bg-background1-DM rounded-lg">
+              <div class="box-content flex flex-col justify-center items-center mb-2 w-full rounded-lg border border-opacity-25 shadow-md md:flex-row md:justify-start md:items-start md:h-48 dark:border-opacity-25 shadow-shadow-LM border-border1 dark:shadow-shadow-DM dark:border-border1-DM">
+                <div class="flex justify-center items-center w-full h-80 rounded-lg md:mr-2 md:w-48 md:h-48 bg-background1 dark:bg-background1-DM">
                   {post.image_url ? (
                     <img
                       src={post.image_url}
@@ -80,13 +80,13 @@ export const ViewCard: Component<Props> = (props) => {
                           ? "User Image"
                           : "No image"
                       }
-                      class="bg-background1 dark:bg-icon1-DM rounded-lg w-full h-full object-cover"
+                      class="object-cover w-full h-full rounded-lg bg-background1 dark:bg-icon1-DM"
                     />
                   ) : (
                     <svg
                       viewBox="0 0 512 512"
                       version="1.1"
-                      class="dark:bg-icon1-DM fill-logo rounded-lg w-full h-full object-cover"
+                      class="object-cover w-full h-full rounded-lg fill-logo dark:bg-icon1-DM"
                     >
                       <g id="Page-1" stroke="none" stroke-width="1">
                         <g
@@ -105,22 +105,22 @@ export const ViewCard: Component<Props> = (props) => {
 
                 <div
                   id="cardContent"
-                  class="flex justify-between px-1 pt-1 text-left w-full md:w-5/6 md:h-full"
+                  class="flex justify-between px-1 pt-1 w-full text-left md:w-5/6 md:h-full"
                 >
                   <div class="w-full">
                     <div class="grid grid-cols-4">
-                      <div class="relative col-span-3 w-full flex align-top">
+                      <div class="flex relative col-span-3 w-full align-top">
                         <div class="w-full">
                           <div class="truncate inline-block max-w-[58%]  md:mt-2 text-ptext2 dark:text-ptext2-DM text-sm md:text-base bg-background2 dark:bg-background2-DM  opacity-[85%] dark:opacity-100 w-fit rounded-lg px-2">
-                             {/*post.major_municipality}/{post.minor_municipality*/}
-                             {/*post.governing_district*/}
+                            {/*post.major_municipality}/{post.minor_municipality*/}
+                            {/*post.governing_district*/}
                           </div>
                           <div class="truncate inline-block max-w-[28%]  md:mt-2 text-ptext2 dark:text-ptext2-DM text-sm md:text-base bg-background2 dark:bg-background2-DM  opacity-[85%] dark:opacity-100 w-fit rounded-lg px-2 ml-1">
                             {post.category}
                           </div>
                         </div>
                       </div>
-                      <div class="relative col-span-1 w-full flex align-top justify-end">
+                      <div class="flex relative col-span-1 justify-end w-full align-top">
                         <div class="inline-block">
                           <DeletePostButton
                             id={post.id}
@@ -137,21 +137,20 @@ export const ViewCard: Component<Props> = (props) => {
                         </div>
                       </div>
 
-                      <p class="text-2xl font-bold text-ptext1 dark:text-ptext1-DM overflow-hidden max-h-14 col-span-4 pr-4 truncate">
+                      <p class="overflow-hidden col-span-4 pr-4 max-h-14 text-2xl font-bold text-ptext1 truncate dark:text-ptext1-DM">
                         {post.title}
                       </p>
                     </div>
 
-                    <p class="overflow-hidden text-ptext1 dark:text-ptext1-DM text-base mb-1">
+                    <p class="overflow-hidden mb-1 text-base text-ptext1 dark:text-ptext1-DM">
                       <span class="font-bold">{t("postLabels.provider")}</span>
                       {post.seller_name}
                     </p>
 
                     <p
-                      class=" text-ptext1 dark:text-ptext1-DM text-sm max-h-[60px] line-clamp-3 mb-2 pt-0.5 overflow-hidden mr-4 prose dark:prose-invert"
+                      class="overflow-hidden pt-0.5 mr-4 mb-2 text-sm text-ptext1 max-h-[60px] line-clamp-3 prose dark:text-ptext1-DM dark:prose-invert"
                       innerHTML={post.content}
                     ></p>
-
                   </div>
                 </div>
               </div>

@@ -29,12 +29,12 @@ interface Props {
   id: string | undefined;
 }
 
-export const ClientViewProviderPosts: Component<Props> = (props) => {
+export const ClientViewProviderPost: Component<Props> = (props) => {
   const [posts, setPosts] = createSignal<Array<ProviderPost>>([]);
 
   createEffect(async () => {
     const { data, error } = await supabase
-      .from("providerposts")
+      .from("seller_post")
       .select("*")
       .eq("seller_id", props.id);
     if (!data) {
@@ -45,8 +45,9 @@ export const ClientViewProviderPosts: Component<Props> = (props) => {
     } else {
       data?.map((item) => {
         productCategories.forEach((productCategories) => {
-          if (item.service_category.toString() === productCategories.id) {
+          if (item.subject2.toString() === productCategories.id) {
             item.category = productCategories.name;
+            console.log(item.category);
           }
         });
         delete item.service_category;

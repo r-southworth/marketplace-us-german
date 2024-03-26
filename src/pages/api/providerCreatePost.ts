@@ -131,9 +131,9 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   if (countryError) {
     return new Response(
       JSON.stringify({
-        message: (t("apiErrors.noCountry")),
+        message: t("apiErrors.noCountry"),
       }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 

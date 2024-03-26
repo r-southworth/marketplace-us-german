@@ -63,17 +63,15 @@ INSERT INTO "public"."clients" ("user_id", "created_at", "location", "client_pho
 --
 
 INSERT INTO "public"."post_category" ("id", "category", "language") VALUES
-	(1, 'Social Studies - History', 1),
-	(2, 'Specialty', 1),
-	(3, 'All Subject Area', 1),
-	(4, 'Art & Music', 1),
-	(5, 'English Language Arts', 1),
-	(6, 'Foreign Language', 1),
-	(7, 'Holiday', 1),
-	(8, 'Math', 1),
-	(9, 'Science', 1),
+	(1, 'Art & Music', 1),
+	(2, 'English Language Arts', 1),
+	(3, 'Foreign Language', 1),
+	(4, 'Holiday', 1),
+	(5, 'Math', 1),
+	(6, 'Science', 1),
+	(7, 'Social Studies', 1),
+	(8, 'Specialty', 1);
 	
-
 
 --
 -- Data for Name: seller_post; Type: TABLE DATA; Schema: public; Owner: postgres
