@@ -13,7 +13,6 @@ import type { AuthSession } from "@supabase/supabase-js";
 
 import stripe from "@lib/stripe";
 
-
 const lang = getLangFromUrl(new URL(window.location.href));
 const t = useTranslations(lang);
 
@@ -866,7 +865,7 @@ export const ViewFullPost: Component<Props> = (props) => {
               </button> */}
                     </div>
 
-                    {/* <p>{ post()?.grade.join(", ") }</p> */}
+                    <p>{post()?.grade!.join(", ")}</p>
                     <p>{post()?.content}</p>
                 </div>
 
